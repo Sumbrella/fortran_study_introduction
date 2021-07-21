@@ -1,7 +1,6 @@
 # Mac 下配置 Fortran 编译环境
 
 ## 目录
-[[toc]]
 
 1. [Mac 编译器安装](#1)
 2. [Mac 编辑器选择和配置](#2)
@@ -97,8 +96,7 @@ pip install fortran-language-server
 2. 选择 `Add folders` 随意打开一个项目文件夹。
 
 3. 打开后创建一个`fortran`源文件。
-
-![Screen Shot 2021-07-21 at 4.31.09 PM](/assets/Screen%20Shot%202021-07-21%20at%204.31.09%20PM.png)
+ <img src=/assets/Screen%20Shot%202021-07-21%20at%204.31.09%20PM.png width=60%>
 
 4.输入如下代码
 ```fortran
@@ -111,7 +109,7 @@ end program main
     <img src=/assets/Screen%20Shot%202021-07-21%20at%204.34.27%20PM.png width=60%>
 
 6. 下方会弹出控制栏
- ![Screen Shot 2021-07-21 at 4.35.27 PM](/assets/Screen%20Shot%202021-07-21%20at%204.35.27%20PM.png)
+  <img src=/assets/Screen%20Shot%202021-07-21%20at%204.35.27%20PM.png width=60%>
  使用快捷键 `control + F6` 编译并运行。并在下方 output 栏中查看运行结果。
 
 

@@ -17,7 +17,7 @@
     > 吐槽一下学校教学还在用vs2010   
 
     - [ ] Windows 下配置
-    - [ ] Mac     下配置
+    - [ ] [Mac     下配置](/docs/0/mac.md)
 1. 基础内容
     - [ ] Fortran 代码风格
     - [ ] Fortran 语法基础
