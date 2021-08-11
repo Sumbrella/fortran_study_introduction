@@ -33,3 +33,8 @@
     - [ ] Fortran 常用库介绍及教程
     - [ ] Fortran 学习资源
     - [ ] Fortran 踩过的坑
+
+## 常用库推荐
+1. Fortran stdlib
+2. fypp
+3. fortran gtk
