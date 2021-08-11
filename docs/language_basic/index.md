@@ -82,3 +82,9 @@
 
 ***
 ## 12. 模块
+
+## 参考
+<https://www.bootwiki.com/fortran/fortran-data-types.html>
+Fortran95 程序设计
+Fortran 权威设计指南
+<https://gcc.gnu.org/onlinedocs/gfortran/PACK.html>
