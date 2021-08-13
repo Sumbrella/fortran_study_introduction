@@ -1,9 +1,9 @@
 # Division
 ## 1. 整除
-### Definition
+### 1.1 定义
 若整数$n$除以整数$d$的余数为$0$, 则称$n$能整除$d$, $d$为$n$的约数, 记为 $d|n$.
 
-### 0x01 Properties
+### 1.2 性质
 
 ###### 1.1 $a|b, \ b|c \Rightarrow a|c$
 ###### 1.2 $a|b \Rightarrow a|bc, c$ 为任意整数
@@ -14,9 +14,9 @@
 
 
 ## 2. 素数
-### 2.1 Definition
+### 2.1 定义
 素数是只有1和它本身两个因数的数。
-### 2.2 Theorem
+### 2.2 定理
 假设 $\pi (x)$ 为 $1$ 到 $x$ 中素数的个数。
 其中:
 $$
@@ -267,3 +267,225 @@ program test
     call show_primes(n)
 end program test
 ```
+***
+## 4. 剩余类群
+### 4.1 $Z^*$ 与 $(Z^*_p, )$
+$(Z^*_P,), $ 称为 $Z_p$的剩余类群，即$(1, 2, ..., p - 1)$, 与 $p$ 互质的数。
+
+#### 4.2 唯一分解定理(算数基本定理)
+任何一个大于 $1$ 的数都可以被分解为有限个质数乘积的形式
+$$
+n = \prod_{i=1}^{m}p_i^{C^i}
+$$
+其中 $p_1 < p_2 < \cdots < p_m$为质数, $C_i$为正整数。
+> 证明: [欧几里得《几何原本》](http://zh.wikipedia.org/wiki/%E7%AE%97%E8%A1%93%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86)
+
+**分解一个质数的方法**
+- **试除法**
+    直接枚举所有因子，然后把当前因子全部除去.
+    复杂度$O(\sqrt n)$
+    ```fortran
+    module division
+    contains
+        subroutine divide(n, factor_number, factors, count_of_factors)
+            implicit none
+            integer, intent(in)                :: n
+            integer, intent(out)               :: factor_number
+            integer, intent(out), dimension(:) :: factors
+            integer, intent(out), dimension(:) :: count_of_factors
+
+            integer              :: i
+            integer              :: x
+
+            x = n
+            factor_number = 0
+            i = 2
+            do while(i * i <= x)
+                if (mod(x, i) == 0) then
+                    factor_number = factor_number + 1
+                    factors(factor_number) = i
+                    do while(mod(x, i) == 0)
+                        x = x / i
+                        count_of_factors(factor_number) =&
+                            count_of_factors(factor_number) + 1
+                    end do
+                end if
+                i = i + 1
+            end do
+            if (x > 1) then  ! must remind a prime
+                factor_number = factor_number + 1
+                factors(factor_number) = x
+                count_of_factors(factor_number) = 1
+            end if
+        end subroutine divide
+
+    end module division
+
+
+    program test
+        use division, only: divide
+        implicit none
+        integer                  :: x, nof, i
+        integer, dimension(100)  :: factors, count_of_factors
+        read(*, *) x
+
+        call divide(x, nof, factors, count_of_factors)
+
+        write(*, *) "The factor of number", x, ":"
+
+        do i = 1, nof
+            write(*, "(I4, A, I4)") factors(i), "^", count_of_factors(i)
+        end do
+
+    end program test
+
+    ```
+    <img src=/assets/Screen%20Shot%202021-08-13%20at%201.01.23%20PM.png width=60%>
+
+
+
+ <!-- - Pollard Rho 算法
+> TODO: 增加Pollard Rho 算法 -->
+
+### 4.3 $Z^*$结构中的一些定理
+**定理 4.1**
+若
+$$
+n = p_1^{\alpha_1} \times p_2^{\alpha_2} \times \cdots \times p_k^{\alpha_k}\\
+m = p_1^{\beta_1} \times p_2^{\beta_2} \times \cdots\times p_k^{\beta_k}
+$$
+则
+
+$$
+n \times m = p_1^{\alpha_1 + \beta_1} \times p_2^{\alpha_2+\beta_2} \times \cdots \times p_k^{\alpha-k + \beta_k}\\
+gcd(n, m) = p_1^{min\{\alpha_1, \beta_1\}} \times p_2^{min\{\alpha_2, \beta_2\}} \times \cdots \times p_k^{min\{\alpha_k, \beta_k\}}\\
+lcm(n, m) = p_1^{max\{\alpha_1, \beta_1\}} \times p_2^{max\{\alpha_2, \beta_2\}} \times \cdots \times p_k^{max\{\alpha_k, \beta_k\}}
+$$
+
+**定理 4.2**
+$$
+(p - 1)! + 1 \equiv 0 (\mod \ p)
+$$
+
+**定理 4.3**
+$$
+(n + 1) (n + 2) \cdots (n + k) \neq 0 \ \ (\mod \ k)
+$$
+
+***
+## 5. 最大公因数及最小公倍数
+### 5.1 约数
+整数$a$除以整数$b$除得的商正好是整数而没有余数，则称b为a的约数。
+设有整数$N$可以分解为
+$$
+N = \prod_{i=1}^m p_i^{C_i}
+$$
+**定理 5.1**
+$N$ 的正约数的个数为
+$$
+(c_1 + 1) \times (c_2 + 1) \times \cdots \times (c_m + 1) = \prod_{i=1}^{m}(c_i + 1)
+$$
+**定理 5.2**
+$N^M$ 的正约数的个数为
+$$
+(M \times c_1 + 1) \times(M \times c_2 + 1) \times \cdots \times (M\times c_m + 1) = \prod_{i = 1}^{m}(M \times c_i + 1)
+$$
+
+**定理 5.3**
+$N$ 的 所有正约数的和为
+$$
+(1 + p_1 + p_1^2 + \cdots + p_1^{c_1}) \times \cdots \times
+(1 + p_m + p_m^2 + \cdots + p_m^{c_2}) = \prod_{i=1}^m{\sum_{j=1}^{c_i}(p_i)^j}
+$$
+
+### 5.2 最大公约数
+对于两个整数 $a, b$ , 最大公约数是同时整除 $a, b$ 的最大约数，记为 $gcd(a, b)$。
+#### 5.2.1 基本定理
+**5.1**  $\gcd(a, b) = \gcd(b, a)$  
+
+**5.2**  $\gcd(a, b) = \gcd(a - b, b) \ (a\geq b)$
+
+**5.3**  $\gcd(a, b) = \gcd(a\mod b, b)$
+
+**5.4**  $\gcd(a, b, c) = \gcd(\gcd(a, b), c) $
+
+**5.5**  $\gcd(ka, kb) = k \gcd(a, b)$
+
+**5.6**  $\gcd(k, ab) = 1  \Leftrightarrow \gcd(k, a) = 1\  and \ \gcd(k, b) = 1$
+
+#### 5.2.2 最大公约数求法
+- **辗转相除法**
+    运用**定理5.3**
+    ```fortran
+    recursive function gcd(a, b) result(r)
+        implicit none
+        integer, intent(in) :: a, b
+        integer :: r
+        if (b == 0) then
+            r = a
+        else
+            r = gcd(b, mod(a, b))
+        end if
+    end function gcd
+    ```
+    辗转相除法在大整数下由于需要大量的取模运算，效果不佳。
+- **Stein**
+    Stein算法主要运用**定理5.5**,如果两个数都是偶数, 把两个数共同除以二并记录2; 如果只有一个数是偶数, 此时2不可能包含在最大公因数里, 则该偶数除以2; 如果两数都是奇数, 返回 `stein(a - b, b) (a > b)`。算法只包含位运算与乘法，在大整数下也有较好的效果。
+    ```fortran
+    recursive function stein(a, b) result(r)
+        implicit none
+        integer, intent(in) :: a, b
+        integer :: r
+        if (a < b) then
+            r = stein(b, a)
+            return
+        end if
+
+        if (b == 0) then
+            r = a
+            return
+        end if
+
+        if (iand(a, 1) == 0 .and. iand(b, 1) == 0) then
+            r = lshift(stein(rshift(a, 1), rshift(b, 1)), 1)
+        else if (iand(a, 1) == 1 .and. iand(b, 1) == 0) then
+            r = stein(a, rshift(b, 1))
+        else if (iand(a, 1) == 0 .and. iand(b, 1) == 1) then
+            r = stein(rshift(a, 1), b)
+        else
+            r = stein(a - b, b)
+        end if
+
+    end function stein
+    ```
+
+**Problem**
+$f[0] = 0$, 当 $n > 1$ 时, $f[n] = (f[n - 1] + a) % b$, 给定 $a$ 和 $b$, 是否存在一个自然数 $k (0 <= k < b)$, 满足$\forall n \in N, f[n] \neq k.$
+
+### 5.3 最小公倍数
+两个数$a, b$的最小公倍数是指能同时被$a, b$整除的数中最小的数, 记为$lcm(a, b)$。
+可以证明
+$$
+\forall a, b \in N, gcd(a, b) \times lcm(a, b) = a \times b
+$$
+
+**Poblem**
+三个数$x, y, z$, 他们的$\gcd$ 为 $G$, $lcm$ 为 $L$, $G$ 和 $L$ 已知, 求有多少个三元组$x, y, z$ 满足条件。
+
+## 5.4 GCD 与 LCM
+**定理5.7**  $\ \ \gcd (F(n), F(m)) = F(\gcd(n, m))$
+**定理5.8**  $\ \ \gcd(a^m - 1, a^n - 1) = a^{\gcd(n, m)} - 1$
+**定理5.9**  $\ \ \gcd(a^m - b^m, a^n - b^n) = a^{\gcd(n, m)} - b^{\gcd(m, n)}$
+**定理5.10**  $\ \gcd(a, b) = 1 \Rightarrow gcd(a^m, b^m) = 1$
+**定理5.11** $\ (a + b) | ab \Rightarrow gcd(a, b) \neq 1$
+**定理5.12** 设 $G = gcd(C_n^1, C_n^2, \dots, C_n^{n - 1})$
+- 若 $n$ 为素数，则 $G = n$
+- 若 $n$ 非素且有一个素因子$p$, $G = p$
+- $n$ 有多个素因子， $G = 1$
+
+**定理5.13** $(n + 1)lcm(C_0^0, C_n^1, \cdots, C_n^n) = lcm(1, 2, \cdots, n + 1)$
+**定理5.14** $Fibonacc$ 数列中相邻两项 $gcd$ 时, 辗转相减的次数等于辗转相乘的次数。
+**定理5.15** $\gcd(fib_n, fib_m) = fib_{gcd(n, m)}$
+> [证明](https://blog.csdn.net/alan_cty/article/details/73928751)
+
+## 6. $Fibonacc$数列
