@@ -13,7 +13,6 @@ program one_if_demo
     if (score >= 60) then
         write(*, *) "及格"
     end if
-
 end program
 ```
 代码中可以看到, `if` 语句的基本语法结构为
@@ -130,7 +129,12 @@ end program
 ## 3. 练习
 
 **EASY**
-1. 从屏幕中读入两个数， 
+1. 从屏幕中读入两个整数 $a, b$, 按从小到大的顺序输出这两个数。
+    >样例
+    **Input**
+    50 30
+    **Output**
+    30 50
 
 **NORMAL**
 
