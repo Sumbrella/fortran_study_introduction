@@ -73,9 +73,33 @@ end program integer_test
 ### 2.4 字符型 (CHARACTER)
 用一对单引号(撇号)或双引号括起来的若干个非空字符串为字
 符型常量，又称为字符或字符串，长度为1的字符串简称为字符， 如:‘x’、‘Y’、‘x+y’、‘@$%’等都是字符型常量。
+字符型变量在声明时，由于一串字符是有长度的，计算机需要知道用户需要声明多长的字符串，因此在声明时候需要告知计算机*字符串长度*， 默认为1，如：
+```fortran
+character char = "a"
+character(len=3) string = "abc"
+
+write(*, *) a       !> a
+write(*, *) string  !> abc
+```
+如果赋值时超出字符串给定的长度，编译器会将超出长度的部分截取，如：
+```fortran
+character(len=2) string = "abc"
+write(*, *) string  !> ab
+```
+也可以使用 `*` 作为长度，来表示默认长度，此时字符变量必须被赋初值，编译器将会字符变量长度赋值为初值字符串的长度，如：
+```fortran
+character(len=*), parameter :: string = "abc"
+write(*, *) string       !> abc
+write(*, *) len(string)  !> 3
+```
+此时，字符串变量只能是常量`(parameter)`或是函数/例程参数。
 
 ### 2.5 逻辑型 (LOGICAL)
 逻辑类型的值仅仅表示真假, 用 `.true.` 或 `.false.` 来赋值。
+```fortran
+logical bool_variable = .true.
+write(*, *) bool_variable  !> T
+```
 
 ## 3. 常量
 常量是在程序运行过程中不变的量， Fortran 有多种声明常量的办法，可以在变量类型后面增加 `parameter`, 来说明该变量是一个常量
