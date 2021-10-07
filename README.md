@@ -13,26 +13,29 @@
 ## TodoList && Content
 这个坑大概可能会包含如下内容:
 
-0. 基本配置
-    > 吐槽一下学校教学还在用vs2010   
+**0. 基本配置**
+> 吐槽一下学校教学还在用vs2010   
 
-    - [ ] [Windows 下配置](/docs/install/windows.md)
-    - [ ] [Mac 下配置](/docs/install/mac.md)
-1. 基础内容
-    - [ ] [Fortran 代码风格](/docs/language_basic/index.md)
-    - [ ] [Fortran 语法基础](/docs/language_basic/index.md)
-2. 进阶内容
-    - [ ] [Fortran 基本算法](/docs/algorithms/index.md)
-    - [ ] Fortran 面向对象
-    - [ ] Fortran 模块管理
-    - [ ] Fortran 图形界面编程
-    - [ ] Fortran 兼容性调整
-    - [ ] Fortran 并行运算
-    - [ ] Fortran 网络通讯
-3. 其他
-    - [ ] Fortran 常用库介绍及教程
-    - [ ] Fortran 学习资源
-    - [ ] Fortran 踩过的坑
+- [ ] [Windows 下配置](/docs/install/windows.md)
+- [ ] [Mac 下配置](/docs/install/mac.md)
+
+**1. 基础内容**
+- [ ] [Fortran 代码风格](/docs/language_basic/index.md)
+- [ ] [Fortran 语法基础](/docs/language_basic/index.md)
+
+**2. 进阶内容**
+- [ ] [Fortran 基本算法](/docs/algorithms/index.md)
+- [ ] Fortran 面向对象
+- [ ] Fortran 模块管理
+- [ ] Fortran 图形界面编程
+- [ ] Fortran 兼容性调整
+- [ ] Fortran 并行运算
+- [ ] Fortran 网络通讯
+
+**3. 其他**
+- [ ] Fortran 常用库介绍及教程
+- [ ] Fortran 学习资源
+- [ ] Fortran 踩过的坑
 
 ## 常用库推荐
 1. Fortran stdlib
