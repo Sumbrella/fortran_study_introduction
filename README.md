@@ -20,9 +20,9 @@
     - [ ] [Mac 下配置](/docs/install/mac.md)
 1. 基础内容
     - [ ] [Fortran 代码风格](/docs/language_basic/index.md)
-    - [ ] Fortran 语法基础
-    - [ ] Fortran 编程范式
+    - [ ] [Fortran 语法基础](/docs/language_basic/index.md)
 2. 进阶内容
+    - [ ] [Fortran 基本算法](/docs/algorithms/index.md)
     - [ ] Fortran 面向对象
     - [ ] Fortran 模块管理
     - [ ] Fortran 图形界面编程
