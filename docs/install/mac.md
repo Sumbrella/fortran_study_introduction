@@ -1,6 +1,4 @@
 # Mac 下配置 Fortran 编译环境
-在 `Mac` 下配置 `Fortran` 编译环境是一件比较头疼的事，
-
 ## 目录
 
 1. [Mac 编译器安装](#1)
@@ -52,7 +50,7 @@ Intel Visual Fortran 由 Microsoft PowerStation，Compaq Visual Fortran 等早�
 ***
 ## <span id="2"> 推荐编辑器及其配置 </span>
 
-### <span id="3"> Visual Studio Code</span>
+### <span id="2.1"> Visual Studio Code</span>
 `visual studio code`是美国微软公司是一个项目：运行于 Mac OS X、Windows和 Linux 之上的，针对于编写现代 Web 和云应用的跨平台源代码编辑器。
 
 整体上来说`vscode` 有着好看的界面，轻量的环境，丰富的插件，是一款很不错的编辑器。
