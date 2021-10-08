@@ -1,21 +1,24 @@
 # Windows 下配置 Fortran 编译环境
 ## 目录
 
-1. [Mac 编译器安装](#1)
+1. [Windows 编译器安装](#1)
     1. [Gfortran](#1.1)
     2. [Intel](#1.1)
-2. [Mac 推荐编辑器及其配置](#2)
+2. [Windows 推荐编辑器及其配置](#2)
     1. [Visual Studio Code](#2.1)
-    2. [Atom](#2.2)
+    2. [Visual Studio (2019)](#2.2)
+    2. [Atom](#2.3)
     3. [Sublime Text](#2.3)
 
 
 
 ## <span id="1">编译器安装</span>
 ### <span id="1.1">GFortran</span>
+`gfortran` 是一款开源的`fortran`编译器, 被被封装在`MinGW`工具包中, Windows 电脑下载安装`MinGW`后更改系统环境变量即可。
 
+参考博客[Windows安装MinGW](http://home.ustc.edu.cn/~liujunyan/blog/windows系统下fortran安装配置/)
 ### <span id="1.2"> Intel </span>
-
+待补, 需要可以参考[官方文档地址](https://software.intel.com/content/www/us/en/develop/tools/oneapi/components/fortran-compiler.html)
 
 ***
 ## <span id="2"> 推荐编辑器及其配置 </span>
@@ -23,25 +26,31 @@
 ### <span id="2.1"> Visual Studio Code</span>
 `visual studio code`是美国微软公司是一个项目：运行于 Mac OS X、Windows和 Linux 之上的，针对于编写现代 Web 和云应用的跨平台源代码编辑器。
 
-整体上来说`vscode` 有着好看的界面，轻量的环境，丰富的插件，是一款很不错的编辑器。
+整体上来说`vscode` 有着好看的界面，轻量的环境，丰富的插件，是一款很不错的编辑器, 运行时基本不占用内存。
 
-#### Visual Studio Code 安装
+#### 1. Visual Studio Code 安装
 按照安装包要求安装即可。
 **[官网](https://code.visualstudio.com)**
 
-#### Fortran 插件安装
+#### 2. Fortran 插件安装
 在右侧菜单栏中选择`Plugin`(小方块)，搜索并安装 `Modern Fortran`.
 ![Screen Shot 2021-07-22 at 12.08.36 AM](/assets/Screen%20Shot%202021-07-22%20at%2012.08.36%20AM.png)
 另外，如果需要中文，可以搜索chinese并安装中文插件。
 ![Screen Shot 2021-07-22 at 12.09.25 AM](/assets/Screen%20Shot%202021-07-22%20at%2012.09.25%20AM.png)
 
-#### 第一份Fortran代码
+#### 3. 第一份Fortran代码
 新建任意一个后缀为 `fortran` 后缀的源文件，输入如下代码。
 ![Screen Shot 2021-07-22 at 12.12.21 AM](/assets/Screen%20Shot%202021-07-22%20at%2012.12.21%20AM.png)
-在右上角点击小三角Run即可运行代码。
+右上角点击小三角Run即可运行代码。
+
+更详细的安装过程可以参考知乎[Fortran软件安装与环境配置：MinGW-w64 (gfortran) / Parallel Studio (ifort)](https://zhuanlan.zhihu.com/p/82002407)
 ***
 
-### <span id="2.2">Atom</span>
+### <span id="2.2"> Visual Studio
+
+
+***
+### <span id="2.3">Atom</span>
 
 Atom 是 Github 开源的文本编辑器，这个编辑器完全是使用Web技术构建的(基于Node-Webkit)。启动速度快，提供很多常用功能的插件和主题，可以说Atom已经足以胜任“半个IDE”了。
 
@@ -127,7 +136,7 @@ end program main
 - 文档解析（Doxy和FORD风格)
 ***
 
-### <span id="2.3">Sublime Text</span>
+### <span id="2.4">Sublime Text</span>
 
 我觉得配置完以后手感一般，特性也比较少。
 可以参考博客<https://www.cnblogs.com/kaikaikai/p/9827283.html>

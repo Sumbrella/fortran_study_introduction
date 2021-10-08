@@ -46,6 +46,8 @@ Intel Visual Fortran 是 Intel 公司出品的一款 Fortran 编译器。兼容 
 
 Intel Visual Fortran 由 Microsoft PowerStation，Compaq Visual Fortran 等早期编译器（这些早期编译器在我国的使用频率极高）发展而来，完全兼容早期编译器的扩展语法及特有使用习惯。
 
+[官方文档地址](https://software.intel.com/content/www/us/en/develop/tools/oneapi/components/fortran-compiler.html)
+
 ***
 ## <span id="2"> 推荐编辑器及其配置 </span>
 
@@ -54,17 +56,17 @@ Intel Visual Fortran 由 Microsoft PowerStation，Compaq Visual Fortran 等早�
 
 整体上来说`vscode` 有着好看的界面，轻量的环境，丰富的插件，是一款很不错的编辑器。
 
-#### Visual Studio Code 安装
+#### 1. Visual Studio Code 安装
 按照安装包要求安装即可。
 **[官网](https://code.visualstudio.com)**
 
-#### Fortran 插件安装
+#### 2. Fortran 插件安装
 在右侧菜单栏中选择`Plugin`(小方块)，搜索并安装 `Modern Fortran`.
 ![Screen Shot 2021-07-22 at 12.08.36 AM](/assets/Screen%20Shot%202021-07-22%20at%2012.08.36%20AM.png)
 另外，如果需要中文，可以搜索chinese并安装中文插件。
 ![Screen Shot 2021-07-22 at 12.09.25 AM](/assets/Screen%20Shot%202021-07-22%20at%2012.09.25%20AM.png)
 
-#### 第一份Fortran代码
+#### 3. 第一份Fortran代码
 新建任意一个后缀为 `fortran` 后缀的源文件，输入如下代码。
 ![Screen Shot 2021-07-22 at 12.12.21 AM](/assets/Screen%20Shot%202021-07-22%20at%2012.12.21%20AM.png)
 在右上角点击小三角Run即可运行代码。
@@ -178,3 +180,6 @@ gfortran temp.f90 -o temp && ./temp
 
 我觉得配置完以后手感一般，特性也比较少。
 可以参考博客<https://www.cnblogs.com/kaikaikai/p/9827283.html>
+***
+### <span id="2.4">Xcode</span>
+待补
