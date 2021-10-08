@@ -5,9 +5,9 @@
     1. [Gfortran](#1.1)
     2. [Intel](#1.1)
 2. [Mac 推荐编辑器及其配置](#2)
-    1 [Visual Studio Code](#2.1)
-    2 [Atom](#2.2)
-    3 [Sublime Text](#2.3)
+    1. [Visual Studio Code](#2.1)
+    2. [Atom](#2.2)
+    3. [Sublime Text](#2.3)
 
 
 
