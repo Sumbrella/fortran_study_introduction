@@ -14,7 +14,6 @@
 这个坑大概可能会包含如下内容:
 
 **0. 基本配置**
-> 吐槽一下学校教学还在用vs2010   
 
 - [ ] [Windows 下配置](/docs/install/windows.md)
 - [ ] [Mac 下配置](/docs/install/mac.md)
