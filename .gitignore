@@ -2,15 +2,3 @@
 /docs/temp
 /.DS_Store
 /src/.DS_Store
-
-
-同学们好!
-为了方便同学们学习`fortran`基础及了解更多的拓展内容, 我在github上编写并开源了一篇`fortran`学习文档,
-该文档我会长期更新维护, 直至系统的包含`fortran`基础、进阶、应用等各项内容, 供广大中文学习者使用。
-现在已经编写完了配置、基础语法(除文件IO, 结构体, 指针外)、注释参考规范、代码参考风格、基础的数论算法实现等内容。
-其中语法基础部分简要的阐述了fortran的基本语法特性, 没有教材那么详细, 我也会在各章章末增加趣味练习题及答案, 同学们可以将其作为预习或是期末复习的资料。
-同学们有兴趣可以进入如下网址阅读:
-我主要在github上更新文档, https://github.com/Sumbrella/fortran_study_introduction
-每隔一段时间会将文档同步到gitee上, 这个更容易登陆上, https://gitee.com/Sumbrella/fortran_study_introduction#/Sumbrella/fortran_study_introduction
-如果有兴趣加入与我共同维护，可以在平台上私信我。
-本人能力有限, 文档中难免出现错误，如果发现请麻烦各位指正, 谢谢各位!
