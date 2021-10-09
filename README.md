@@ -23,8 +23,8 @@
 
 **1. 基础内容**
 - [ ] [Fortran 语法基础](/docs/language_basic/index.md)
-- [ ] Fortran 代码风格
-- [ ] Fortran 注释规范
+- [ ] [Fortran 代码风格](/docs/style.md)
+- [ ] [Fortran 注释规范](/docs/comment.md)
 - [ ] Fortran 最佳实践
 
 **2. 进阶内容**
@@ -42,6 +42,7 @@
 - [ ] Fortran 踩过的坑
 
 ## 常用库推荐
-1. Fortran stdlib
-2. fypp
-3. fortran gtk
+1. [Fortran stdlib](https://github.com/fortran-lang/stdlib): 官方提供的标准库。
+2. fypp: 基于python的库, 目的是批量生成fortran模版类等。
+3. fortran gtk: 图形化编程。
+4. [FORD](https://github.com/Fortran-FOSS-Programmers/ford): fortran自动文档生成器, 特点是可以自动生成函数调用关系图
