@@ -24,8 +24,8 @@
 **1. 基础内容**
 > 除了语法基础以外, 代码风格与注释规范对于入门者来说是十分重要的内容, 可以多次阅读参考。
 
-- [ ] [Fortran 语法基础](/docs/language_basic/index.md)
 - [ ] [Fortran 注释规范](/docs/comment.md)
+- [ ] [Fortran 语法基础](/docs/language_basic/index.md)
 - [ ] [Fortran 代码风格](/docs/style.md)
 - [ ] Fortran 最佳实践
 
