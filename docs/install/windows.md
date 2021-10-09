@@ -43,11 +43,11 @@
 ![Screen Shot 2021-07-22 at 12.12.21 AM](/assets/Screen%20Shot%202021-07-22%20at%2012.12.21%20AM.png)
 右上角点击小三角Run即可运行代码。
 
-更详细的安装过程可以参考知乎[Fortran软件安装与环境配置：MinGW-w64 (gfortran) / Parallel Studio (ifort)](https://zhuanlan.zhihu.com/p/82002407)
+如果有兴趣自己写`MakeFile`可以参考这篇[博客](https://iraspa.org/blog/visual-studio-code-c-cpp-fortran-with-multiple-source-files/).
 ***
 
 ### <span id="2.2"> Visual Studio
-
+可以参考知乎[Fortran软件安装与环境配置：MinGW-w64 (gfortran) / Parallel Studio (ifort)](https://zhuanlan.zhihu.com/p/82002407)
 
 ***
 ### <span id="2.3">Atom</span>
