@@ -176,7 +176,17 @@ integer function add(a, b)
 end function
 ```
 
-
+**3. 函数定义时也可以指定一个变量来表示其返回值**
+需要使用`result`语句
+如:
+```fortran
+integer function add(a, b) result(r)
+    integer :: a
+    integer :: b
+    integer :: r
+    r = a + b
+end funciton
+```
 ## 3. 参数 (argument)
 
 ### 3.1 作用域
@@ -518,6 +528,25 @@ end interface
 在部分需求下, `function/subroutine`的部分参数有时需要被传入, 有时不需要被传入, 这时就需要用到特殊的修饰词`optional`, 表明该参数是一个可选参数。另外, 可以用`present`函数来检查一个参数是否被传入。
 如:
 ```fortran
+!> program 9-7
+
+program option_demo
+    implicit none
+
+    !> This subroutine need interface to use.
+    interface
+
+        subroutine useless(number)
+            integer, optional :: number
+        end subroutine
+
+    end interface
+
+    call useless(10)
+    call useless()
+end program
+
+
 subroutine useless(number)
     implicit none
     integer, optional :: number
@@ -530,16 +559,170 @@ subroutine useless(number)
 
 end subroutine
 
-program option_demo
-    implicit none
-    call useless(10)
-    call useless()
-end program
+```
+程序输出:
+```fortran
+The optional argument number is :          10
+The optional argument don't find.
+```
+
+可以使用`optional`实现给参数赋默认值:
+```fortran
+integer, optional :: a
+integer           :: real_a
+integer           :: default_value = 5
+
+if (.not. present(a)) then
+    real_a = default_value
+else
+    real_a = a
+end if
 ```
 
 #### 3.5.3 指定参数位置传参
+在常规的函数中, 传递参数需要按照参数列表的顺序逐个传参。
+但是为了程序编写的方便, `fortran`允许用户更改参数传递的顺序。
+如:
+```fortran
+subroutine demo(a, b, c)
+    integer :: a, b, c
+    ...
+end subroutine
 
+program main
+    ...
 
+    interface
+        subroutine demo(a, b, c)
+            integer :: a, b, c
+        end subroutine
+    end interface
+
+    ...
+    call demo(b=2, a=1, c=3)    !! use argument's name to pass.
+    ...
+end program
+```
 ## 4. 特殊函数
 ### 4.1 递归函数
-### 4.2 内部函数
+`fortran`中传递参数时是按址传参的, 所以普通的函数并不能实现递归。
+为此, `fortran`提供了特殊的递归函数类型。
+递归函数的参数是按值传递的, 修改它不会改变实参。
+要按照如下方式定义:
+```fortran
+recursive return_type function function_name(args) result(result_name)
+    arg_type, arg_adj :: arg
+    ...
+    ...
+end function
+```
+> 在`Fortran90`标准中, 递归函数的返回值一定要使用`result`
+
+下面的程序展示了用递归函数求阶乘:
+```fortran
+!> program 9-8
+program main
+    implicit none
+    integer, external :: fact
+    integer :: n = 5
+
+    write(*, *) fact(n)
+
+end program
+
+
+recursive integer function fact(n) result(ans)
+    !! get the result of n!
+    !! Arguments:
+    implicit none
+    integer, intent(in) :: n
+
+    if (n < 0) then
+        write(*, *) 'ERROR: function fact argument `n` should be an positive integer.'
+        ans = -1
+        return
+    else if (n == 0) then
+        ans = 1
+    else
+        ans = fact(n - 1) * n
+    end if
+
+end function
+```
+
+### 4.2 LOCAL 函数
+`fortran90`以后可以将函数归属给某一`program`或是`function/subroutine`, 让其他的`program/function/subroutine`无法调用这个被归属的函数。
+表明一个归属函数需要使用`contains`语句
+```fortran
+program/subroutine/function name[()]
+    implicit none
+
+    ...
+
+contains
+
+    subroutine localsub()       !! This subroutine can only be used in this code block
+        ...
+    end subroutine
+
+
+    function localfunc()        !! This funcion can only be used in this code block
+        ...
+    end function localfunc
+
+
+end program/subroutine/function
+```
+
+### 4.3 PURE 函数
+`pure`函数是一类支持并行运算的函数, 它的运算速度比普通函数快, 只需要在 `subroutine/function`前面增加 `pure`, 但是为了支持并行运算, `pure`函数必须满足以下全部条件:
+1. 所有的参数为`intent(in)`
+2. 每个参数都要赋值属性
+3. 不能使用SAVE
+4. 调用的函数也必须为`pure`函数
+5. 不能使用`STOP`及输入输出相关的语句
+6. 不能改变全局变量的值
+
+如果不满足上述条件, 在并行运算时会出现多线程同时修改、同时打印导致程序不稳定或是出现意想不到的结果。
+
+
+### 4.4 ELEMENTAL 函数
+正如其名, `elemental`函数是一类专门操作数组的函数, 该类函数支持并行运算, 且会对传入的数组中每一个元素进行函数内的操作。
+使用该函数需要满足`pure`函数的所有条件。
+该函数传入的全部参数必须有相同大小, 如果大小不同会报错。
+```
+19 |     write(*, "(10I3)") multiply_by_two(a, b)
+   |                                          1
+Error: Different shape for elemental procedure at (1) on dimension 1 (5 and 10)
+```
+该函数会返回一个数组, 大小与传入的操作次数相同。
+下面的程序将数组中的每一个元素乘以2:
+```fortran
+!> program 9-9
+program main
+    implicit none
+
+    interface
+        elemental function multiply_by_two(num) result(res)
+            implicit none
+            integer, intent(in) :: num
+            integer             :: res
+        end function
+    end interface
+
+    integer :: i
+    integer :: a(10) = [(i, i = 1, 10)]
+
+    write(*, "(10I3)") a
+    write(*, *) "After operation"
+    write(*, "(10I3)") multiply_by_two(a)
+
+end program
+
+elemental function multiply_by_two(num) result(res)
+    implicit none
+    integer, intent(in) :: num
+    integer             :: res
+    res = num * 2
+end function
+```
