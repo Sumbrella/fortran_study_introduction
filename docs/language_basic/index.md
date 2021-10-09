@@ -1,5 +1,5 @@
 # Table of content
-## 1. [引入](./introduce.md)
+## 1. [引入](./Introduce.md)
 ***
 
 ## 2. [数据类型](./data_types.md)
@@ -41,7 +41,7 @@
 ## 12. 模块
 
 ## 参考
-<https://www.bootwiki.com/fortran/fortran-data-types.html> 
+<https://www.bootwiki.com/fortran/fortran-data-types.html>
 
 Fortran95 程序设计
 
