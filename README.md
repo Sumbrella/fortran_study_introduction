@@ -49,3 +49,14 @@
 2. [fypp](https://github.com/aradi/fypp): 基于python的库, 目的是批量生成fortran模版类等。
 3. [fortran gtk](https://github.com/vmagnin/gtk-fortran): 图形化编程。
 4. [FORD](https://github.com/Fortran-FOSS-Programmers/ford): fortran自动文档生成器, 特点是可以自动生成函数调用关系图
+
+## 参考
+<https://www.bootwiki.com/fortran/fortran-data-types.html>
+
+Fortran95 程序设计
+
+Fortran 权威设计指南
+
+<https://gcc.gnu.org/onlinedocs/gfortran/PACK.html>
+
+Chapman - 2018 - Fortran for scientists and engineers
