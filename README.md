@@ -22,9 +22,11 @@
 - [ ] [Mac 下配置](/docs/install/mac.md)
 
 **1. 基础内容**
+> 除了语法基础以外, 代码风格与注释规范对于入门者来说是十分重要的内容, 可以多次阅读参考。
+
 - [ ] [Fortran 语法基础](/docs/language_basic/index.md)
-- [ ] [Fortran 代码风格](/docs/style.md)
 - [ ] [Fortran 注释规范](/docs/comment.md)
+- [ ] [Fortran 代码风格](/docs/style.md)
 - [ ] Fortran 最佳实践
 
 **2. 进阶内容**
@@ -43,6 +45,7 @@
 
 ## 常用库推荐
 1. [Fortran stdlib](https://github.com/fortran-lang/stdlib): 官方提供的标准库。
-2. fypp: 基于python的库, 目的是批量生成fortran模版类等。
-3. fortran gtk: 图形化编程。
+2. [Fortran Package Manager](https://github.com/fortran-lang/fpm): 官方提供的第三方库管理模块。
+2. [fypp](https://github.com/aradi/fypp): 基于python的库, 目的是批量生成fortran模版类等。
+3. [fortran gtk](https://github.com/vmagnin/gtk-fortran): 图形化编程。
 4. [FORD](https://github.com/Fortran-FOSS-Programmers/ford): fortran自动文档生成器, 特点是可以自动生成函数调用关系图
