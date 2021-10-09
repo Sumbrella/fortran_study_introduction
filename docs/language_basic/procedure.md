@@ -245,8 +245,8 @@ program count_demo
     end do
 end program
 
-!! count and show how many times the subroutine be used.
 subroutine count_one()
+    !! count and show how many times the subroutine be used.
     implicit none
     integer :: count = 0
     count = count + 1
@@ -402,8 +402,8 @@ Error: Non-variable expression in variable definition context (actual argument t
 下面的程序一个用于打印数组元素的子例程：
 ```fortran
 !> program 9-6
-!! print an array for the first n elements.
 subroutine print_array(array, n)
+    !! print an array for the first n elements.
     implicit none
     integer, intent(in) :: array(*)  ! declaction of array
     integer, intent(in) :: n         ! the number to be printed
@@ -461,15 +461,18 @@ end program
 !> program 9-7
 program main
     implicit none
-    external :: sub1, sub2  !! use external to give definition of an subroutine.
+    external :: sub1, sub2  
+    !! use external to give definition of an subroutine.
     call call_subroutine(sub1)
     call call_subroutine(sub2)
 end program
 
-!! just use the subroutine.
 subroutine call_subroutine(sub)
+    !! just use the subroutine.
     implicit none
-    external :: sub  !! use external give definition.
+
+    external :: sub  
+    !! use external give definition.
     call sub()
 end subroutine
 
