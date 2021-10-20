@@ -88,7 +88,7 @@ subroutine swap(a, b)
     t = a
     a = b
     b = t
-end subroutine swap
+end subroutine
 ```
 
 
@@ -725,4 +725,30 @@ elemental function multiply_by_two(num) result(res)
     integer             :: res
     res = num * 2
 end function
+```
+
+
+## 5. 全局变量
+### 5.1  COMMON
+有时, 部分变量在整个程序运行过程中需要被多个子历程或是函数读取或是修改, 每一次都传递参数过于麻烦, `fortran` 提供了 `common` 语句来申明全局变量。
+```fortran {class="line-numbers" cmd="gfortran"}
+!> program 9-10
+program common_demo
+    implicit none
+    integer :: a, b
+    common a, b
+    call print_number()
+    a = 1
+    b = 2
+    call print_number()
+
+end program
+
+
+subroutine print_number()
+    implicit none
+    integer :: n1, n2
+    common n1, n2
+    write(*, *) n1, n2
+end subroutine
 ```
