@@ -67,9 +67,9 @@ end program
     `ZERO`: 空格表示0
 - `position` 参数
     文件打开时所在的位置。
-    有三个可选字段 `axis`, `rewind`, `append`。
-    默认为 `axis`
-    - `axis` 文件打开时的位置, 一般为开头。
+    有三个可选字段 `asis`, `rewind`, `append`。
+    默认为 `asis`
+    - `asis` 文件打开时的位置, 一般为开头。
     - `rewind` 移动到文件的开头。
     - `append` 移动到文件的结尾。
 
@@ -86,4 +86,115 @@ end program
     默认为`no`
     - `yes` 格式化输入时, 不足的位会填入空格。
     - `no`  格式化输入时, 不足的为不会填入空格。
-    
+- `delim` 参数
+    格式化输出字符串时是否加引号。
+    三个可选字段`none`, `quote`, `apostrophe`
+    - none 直接输出
+    - quote 增加单引号
+    - apostrophe 增加双引号
+
+### 9.1.2 inquire
+该函数用于查询文件的状态。
+比如使用`inquire`查询文件是否存在。
+```fortran
+!> program 9-1
+program inquire_demo
+    implicit none
+    character(len=*), parameter :: filename = "in"
+    logical :: exists
+
+    inquire(file=filename, exist=exists)
+
+    if (exists) then
+        write(*, *) "file:  ", filename, " exist."
+    else
+        write(*, *) "file:", filename, " don't exist."
+    end if
+end program
+```
+
+当然, `inquire`还有其他功能, 其所有的参数如下:
+- `unit`
+需要查询的文件通道
+- `file`
+需要查询的文件名
+- `iostat`
+文件输入输出情况
+    - stat > 0 操作错误
+    - stat = 0 操作成功
+    - stat < 0 文件终了
+- `err`
+发生错误后会转到指定的代码运行
+- `exist`
+文件是否存在
+- `opened`
+是否已经被打开
+- `number`
+查询文件所在代码
+- `named`
+文件是否有名字。(判断文件是否为暂存文件)
+- `access`
+查询文件读取格式。
+返回为`sequential`, `direct`, `undefiend`中的一个。
+- `sequential`
+查询文件是否为顺序格式
+返回为`YES`, `NO`, `UNKNOWN`中的一个
+- `direct`
+查询文件是否使用直接格式。
+返回值为`YES`, `NO`, `UNKNOWN`.
+- `form`
+查看文件的保存方法。
+`FORMATTED`, `UNFORMATTED`, `UNDEFINED`中的一个。
+
+- `formatted`
+查询文件是否为文本读取方式。
+返回值为`YES`, `NO`, `UNKNOWN`.
+- `unformatted`
+查询文件是能否为二进制文件
+返回值为`YES`, `NO`, `UNKNOWN`。
+- `recl`
+返回文件`open`时设置的`recl`值。
+- `nextrec`
+返回下一次文件读写位置
+- blank
+文件 `open`时 `blank`参数所给定的字符
+- position
+返回打开文件时`position`所给定的字符串。
+可以是`APPEND`, `ASIS`, `UNDEFINED`
+- action
+查询文件打开时`action`所赋值的字符串。
+- read
+查询文件是否可读
+返回值为`YES`, `NO`, `UNKNOWN`。
+- write
+查询文件是否可写
+返回值为`YES`, `NO`, `UNKNOWN`。
+- readwrite
+查询文件是否可读写。
+返回值为`YES`, `NO`, `UNKNOWN`
+- delim
+打开文件时, `delim`字段设置的字符。
+- pad
+打开文件时, `pad`设置的字符。
+
+### 9.1.3 其他指令
+1. **BACKSPACE**
+`backspace(unit, err, iostat)`
+把文件的读写位置退回一步。
+2. **REWIND**
+`rewind(unit, err, iostat)`
+退回到文件开头。
+3. **CLOSE**
+`close(unit, status, err, iostat)`
+关闭文件.
+其中`status`字段可以是:
+    - `keep`: 关闭文件后保存。
+    - `delete`: 关闭文件后删除。
+## 9.2 文件操作示例
+### 9.2.1 顺序文件操作
+### 9.2.2 直接文件操作
+### 9.2.3 二进制文件操作
+
+## 9.3 内部文件
+
+## 9.4 NAMELIST
