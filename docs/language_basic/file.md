@@ -190,11 +190,145 @@ end program
 其中`status`字段可以是:
     - `keep`: 关闭文件后保存。
     - `delete`: 关闭文件后删除。
-## 9.2 文件操作示例
-### 9.2.1 顺序文件操作
-### 9.2.2 直接文件操作
-### 9.2.3 二进制文件操作
 
-## 9.3 内部文件
+## 9.2 文件操作规范
+1. iostat 参数
+在对文件进行操作时, 应保证必要时对该参数进行检查, 如
+    ```fortran
+    open(unit=iounit, file=filename, iostat=ios)
+    if ( ios /= 0 ) stop "Error opening file filename"
+    ```
 
-## 9.4 NAMELIST
+2. action 参数
+在文件打开时, 如果文件只有读的必要, 可将`action`参数设置为`read`, 以免操作时对文件错误修改; 或是文件只有写的必要, 可将`action`参数设置为`write`。如:
+    ```fortran
+    open(unit=inunit, file='in', action='read', iostat=ios)
+    open(unit=outunit, file='out', action='write', iostat=ios)
+    ```
+
+3. close 命令
+文件打开后, 需要及时将文件关闭, 避免占用过多的内存空间。
+    ```fortran
+    close(unit=iounit, iostat=ios)
+    if ( ios /= 0 ) stop "Error closing file unit ", iounit
+    ```
+
+## 9.3 文件操作示例
+### 9.3.1 顺序文件操作
+下面的程序将为文件自动标注行号:
+```fortran {class="line-numbers"}
+!> program 9-2: auto mark line numbers for a file.
+program mark_line_numbers
+    implicit none
+    integer, parameter :: max_string_length = 203
+
+    integer, parameter :: in_unit = 99
+    integer, parameter :: out_unit = 100
+
+    character(max_string_length) :: in_file
+    character(max_string_length) :: out_file
+
+    character(max_string_length) :: buffer
+
+    integer :: stat
+    integer :: counter
+
+    write(*, *) "Please enter input filepath >>>"
+    read(*, *) in_file
+
+    write(*, *) "Please enter output filepath >>>"
+    read(*, *) out_file
+
+    call check_file_exists(in_file)
+
+    !> Use status=old, action=read to open input file.
+    open(unit=in_unit, file=in_file, status="old", action="read")
+    !> User status=replace, action=write to open output file.
+    open(unit=out_unit, file=out_file, status="replace", action="write")
+
+    counter = 0
+    do while (.true.)
+        read (in_unit,  "(A203)", iostat=stat) buffer
+        if (stat /= 0) exit  !> the file is over
+        !> write into output file
+        write(out_unit, "(I3, '.', A)") counter, trim(buffer)
+        counter = counter + 1
+    end do
+
+    close(in_unit)
+    close(out_unit)
+
+end program
+
+
+subroutine check_file_exists(filename)
+    !! check a file exists or not.
+    !! if the file don't exist, program will quit.
+    implicit none
+    character(*), intent(in) :: filename
+    logical :: exists
+
+    inquire(file=filename, exist=exists)
+    if (.not. exists) then
+        write(*, *) "file :", filename, " don't exist."
+        stop
+    end if
+end subroutine
+```
+
+### 9.3.2 直接文件操作
+> 待补
+### 9.3.3 二进制文件操作
+> 待补
+
+## 9.4 内部文件
+`fortran`除了可以将内容格式化写入文件外, 还可以将其写入字符串中。
+```fortran{class="line-numbers"}
+program internal_demo
+    implicit none
+    integer :: a = 2
+    integer :: b = 3
+    character(len=20) :: string
+    write(unit=string, fmt="(I2, '+', I2, '=', I2)") a, b, a + b
+    write(*, *) string
+end program
+```
+输出:
+```
+ 2+ 3= 5
+```
+当然, 字符串也可以使用`read`语句来进行读取, 在这里不再赘述。
+
+## 9.5 NAMELIST
+命名空间(`namelist`)将一组变量封装在一起，可以快速的进行输入输出。
+如:
+```fortran {class="line-numbers"}
+program namelist_demo
+    implicit none
+    integer :: a = 1, b = 2, c = 3
+    namelist /na/ a, b, c
+    write(*, nml=na)
+end program
+```
+输出如下:
+```
+&NA
+ A=1          ,
+ B=2          ,
+ C=3          ,
+ /
+ ```
+`namelist`的语法为:
+
+```
+namelist /nl_name/ var1, var2,...
+```
+
+之后在`read`或是`write`中将`nml`参数更改为命名的`namelist`名字就可以进行输入输出操作了。
+```fortran
+write[read](*, nml=na)
+```
+但是`namelist`的输入输出有固定格式, 输入时要以`&na` 开始, 赋值变量, `/`结束， 如:
+```
+&na a=1 a=2 /
+```
