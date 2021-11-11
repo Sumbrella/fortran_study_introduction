@@ -6,7 +6,7 @@ program if_demo
     read(*, *) score
     if (score > 100 .or. score < 0) then
         write(*, *) "超出范围"
-    else if (score >= 60)
+    else if (score >= 60) then
         write(*, *) "及格"
     else
         write(*, *) "不及"
